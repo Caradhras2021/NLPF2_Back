@@ -1,0 +1,11 @@
+1- create .env
+
+2- sudo docker-compose up -d
+
+3- sudo mv new_full.csv db/data
+
+4- sudo docker exec -it postgres /bin/bash
+
+5- psql -U postgres
+
+6- \copy immobilier FROM '/var/lib/postgresql/data/new_full.csv' DELIMITER ',' CSV HEADER;
