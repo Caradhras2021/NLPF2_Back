@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity({ name: "immobilier"})
-export class HomeEntity{
+@Entity({ name: 'immobilier' })
+export class HomeEntity {
   @PrimaryGeneratedColumn()
   id_mutation: string;
 

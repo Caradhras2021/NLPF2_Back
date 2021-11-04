@@ -45,6 +45,22 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## Setup backend
+
+```
+1- create .env
+
+2- sudo docker-compose up -d
+
+3- sudo mv new_full.csv db/data
+
+4- sudo docker exec -it postgres /bin/bash
+
+5- psql -U postgres
+
+6- \copy immobilier FROM '/var/lib/postgresql/data/new_full.csv' DELIMITER ',' CSV HEADER;
+```
+
 ## Test
 
 ```bash
@@ -57,6 +73,20 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+
+## Features
+
+- Average price per square meters on specifis location (home vs appartment)
+
+- Price estimation of specific home + max and min for the research
+
+- Indice de fiabilité estimation -> suivant le nb de résultats et le delta (min max)
+
+- List all appartment / home that you can buy based on a specific apport + specific location + duration refund with interest
+
+- filters by price / location / size / nb rooms
+
+- Taux d'inflation sur une localisation (augmentation ou diminution des prix sur une localisation sur un an)
 
 ## Support
 
