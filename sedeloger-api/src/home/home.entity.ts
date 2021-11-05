@@ -1,3 +1,4 @@
+import { ParseIntPipe } from '@nestjs/common';
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'immobilier' })
