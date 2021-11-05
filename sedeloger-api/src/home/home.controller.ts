@@ -26,9 +26,7 @@ export class HomeController {
   }
 
   @Post('/averagePrice')
-  getAveragePrice(
-    @Body('filters') filters: SelogerFilters,
-  ): Promise<number> {
+  getAveragePrice(@Body('filters') filters: SelogerFilters): Promise<number> {
     const data = this.homeService.getAveragePrice(filters);
     return data;
   }
@@ -38,6 +36,14 @@ export class HomeController {
     @Body('filters') filters: SelogerFilters,
   ): Promise<AveragePrice> {
     const data = this.homeService.getAveragePriceHouse(filters);
+    return data;
+  }
+
+  @Post('/averagePrice/apartment')
+  getAveragePriceApartment(
+    @Body('filters') filters: SelogerFilters,
+  ): Promise<AveragePrice> {
+    const data = this.homeService.getAveragePriceApartment(filters);
     return data;
   }
 
