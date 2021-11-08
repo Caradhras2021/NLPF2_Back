@@ -36,3 +36,4 @@ lerna-debug.log*
 # packages
 yarn.lock
 db/data
+db/pgdata
