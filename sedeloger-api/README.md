@@ -76,15 +76,15 @@ $ npm run test:cov
 
 ## Features
 
-- Average price per square meters on specifis location (home vs appartment)
+[OK] Average price per square meters on specifis location (home vs appartment)
 
-- Price estimation of specific home + max and min for the research
+[OK] Price estimation of specific home + max and min for the research
 
-- Indice de fiabilité estimation -> suivant le nb de résultats et le delta (min max)
+[OK] Indice de fiabilité estimation -> suivant le nb de résultats et le delta (min max)
 
-- List all appartment / home that you can buy based on a specific apport + specific location + duration refund with interest
+[OK] List all appartment / home that you can buy based on a specific apport + specific location + duration refund with interest
 
-- filters by price / location / size / nb rooms
+[OK] Filters by price / location / size / nb rooms
 
 - Taux d'inflation sur une localisation (augmentation ou diminution des prix sur une localisation sur un an)
 
