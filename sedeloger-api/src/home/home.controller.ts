@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { HomeEntity } from './home.entity';
-import { AveragePrice, SelogerFilters } from './home.interface';
+import { AveragePrice, InflationRate, SelogerFilters } from './home.interface';
 import { HomeService } from './home.service';
 
 @Controller('/home')
@@ -52,6 +52,14 @@ export class HomeController {
     @Body('filters') filters: SelogerFilters,
   ): Promise<number> {
     const data = this.homeService.getEstimationPrice(filters);
+    return data;
+  }
+
+  @Post('/inflationRate')
+  getInflationRate(
+    @Body('filters') filters: SelogerFilters,
+  ): Promise<InflationRate> {
+    const data = this.homeService.getInflationRate(filters);
     return data;
   }
 }

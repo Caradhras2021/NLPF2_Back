@@ -1,7 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { AveragePrice, DeltaPrice, SelogerFilters } from './home.interface';
+import {
+  AveragePrice,
+  DeltaPrice,
+  InflationRate,
+  SelogerFilters,
+} from './home.interface';
 import { HomeEntity } from './home.entity';
 
 @Injectable()
@@ -154,6 +159,43 @@ export class HomeService {
       });
 
       return Math.round(totalPrice / totalSurface);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getInflationRate(filter: SelogerFilters): Promise<InflationRate> {
+    try {
+      const transactions = await this.usersRepository.find({ where: filter });
+      let totalPrice2019 = 0;
+      let totalSurface2019 = 0;
+      let totalPrice2020 = 0;
+      let totalSurface2020 = 0;
+
+      // Get the price and surface of the first and last transactions
+      transactions.forEach((elt) => {
+        if (elt.date_mutation.getFullYear() == 2019) {
+          totalPrice2019 += +elt.valeur_fonciere;
+          totalSurface2019 += +elt.lot1_surface_carrez;
+        }
+
+        if (elt.date_mutation.getFullYear() == 2020) {
+          totalPrice2020 += +elt.valeur_fonciere;
+          totalSurface2020 += +elt.lot1_surface_carrez;
+        }
+      });
+
+      // Compute the price per square meter of the first and last transactions
+      const pricePerSquareMeter2019 = totalPrice2019 / totalSurface2019;
+      const pricePerSquareMeter2020 = totalPrice2020 / totalSurface2020;
+
+      const inflationRate: InflationRate = {
+        averagePrice2019: pricePerSquareMeter2019,
+        averagePrice2020: pricePerSquareMeter2020,
+        delta20192020: pricePerSquareMeter2020 - pricePerSquareMeter2019,
+      };
+
+      return inflationRate;
     } catch (error) {
       throw error;
     }
