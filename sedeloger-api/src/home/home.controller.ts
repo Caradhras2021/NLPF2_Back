@@ -1,6 +1,11 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { HomeEntity } from './home.entity';
-import { AveragePrice, SelogerFilters } from './home.interface';
+import {
+  AveragePrice,
+  CreditInfos,
+  CreditResults,
+  SelogerFilters,
+} from './home.interface';
 import { HomeService } from './home.service';
 
 @Controller('/home')
@@ -47,11 +52,12 @@ export class HomeController {
     return data;
   }
 
-  @Post('/estimationPrice')
-  getEstimationPrice(
+  @Post('/credit')
+  getCredit(
     @Body('filters') filters: SelogerFilters,
-  ): Promise<number> {
-    const data = this.homeService.getEstimationPrice(filters);
+    @Body('creditInfos') creditInfos: CreditInfos,
+  ): Promise<CreditResults> {
+    const data = this.homeService.getCredit(filters, creditInfos);
     return data;
   }
 }

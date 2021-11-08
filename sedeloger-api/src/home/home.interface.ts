@@ -1,3 +1,5 @@
+import { HomeEntity } from './home.entity';
+
 export interface SelogerFilters {
   date_mutation?: Date;
   valeur_fonciere?: number;
@@ -10,6 +12,24 @@ export interface SelogerFilters {
   nombre_pieces_principales?: number;
   longitude?: number;
   latitude?: number;
+}
+
+export interface CreditResults {
+  creditInfos: CreditCompute;
+  homeEntities: HomeEntity[];
+}
+
+export interface CreditInfos {
+  apport: number;
+  salaire: number;
+}
+
+export interface CreditCompute {
+  priceMax: number;
+  mensualiteMax: number;
+  dureeMin: number;
+  montantCreditMax: number;
+  dureeMinYear?: number;
 }
 
 export interface DeltaPrice {

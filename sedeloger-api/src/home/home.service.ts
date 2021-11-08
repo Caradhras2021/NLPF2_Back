@@ -1,7 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { AveragePrice, DeltaPrice, SelogerFilters } from './home.interface';
+import { Between, Repository } from 'typeorm';
+import {
+  AveragePrice,
+  CreditCompute,
+  CreditInfos,
+  CreditResults,
+  DeltaPrice,
+  SelogerFilters,
+} from './home.interface';
 import { HomeEntity } from './home.entity';
 
 @Injectable()
@@ -94,6 +101,48 @@ export class HomeService {
       };
 
       return averagePriceRes;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  recalculateFilters(creditInfos: CreditInfos): CreditCompute {
+    const priceMax = creditInfos.apport * 10;
+    const mensualiteMax = creditInfos.salaire * 0.3;
+    const montantCredit = priceMax - creditInfos.apport;
+    const dureeMin = montantCredit / mensualiteMax;
+    const result: CreditCompute = {
+      priceMax: priceMax,
+      mensualiteMax: mensualiteMax,
+      montantCreditMax: montantCredit,
+      dureeMin: dureeMin,
+      dureeMinYear: Math.round(dureeMin / 12),
+    };
+    return result;
+  }
+
+  async getCredit(
+    filters: SelogerFilters,
+    creditInfos: CreditInfos,
+  ): Promise<CreditResults> {
+    try {
+      const creditCompute = this.recalculateFilters(creditInfos);
+      const newFilters = {}; // stock previous filter and compute the new valeur_fonciere
+      for (const attribut in filters) {
+        newFilters[attribut] = filters[attribut];
+      }
+      newFilters['valeur_fonciere'] = Between(
+        creditCompute.priceMax * 0.8,
+        creditCompute.priceMax,
+      );
+      const homeEntitiesRes = await this.usersRepository.find({
+        where: newFilters,
+      });
+      const res: CreditResults = {
+        creditInfos: creditCompute,
+        homeEntities: homeEntitiesRes,
+      };
+      return res;
     } catch (error) {
       throw error;
     }
