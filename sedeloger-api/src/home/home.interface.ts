@@ -33,5 +33,5 @@ export interface AveragePrice {
 export interface InflationRate {
   averagePrice2019: number;
   averagePrice2020: number;
-  delta20192020: number;
+  inflation: number;
 }

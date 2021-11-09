@@ -174,25 +174,41 @@ export class HomeService {
 
       // Get the price and surface of the first and last transactions
       transactions.forEach((elt) => {
-        if (elt.date_mutation.getFullYear() == 2019) {
-          totalPrice2019 += +elt.valeur_fonciere;
-          totalSurface2019 += +elt.lot1_surface_carrez;
-        }
+        let currPrice = +elt.valeur_fonciere;
+        let currSurface = +elt.lot1_surface_carrez;
 
-        if (elt.date_mutation.getFullYear() == 2020) {
-          totalPrice2020 += +elt.valeur_fonciere;
-          totalSurface2020 += +elt.lot1_surface_carrez;
+        // Check if this transaction should be taken into account
+        if (currPrice != 0 && currSurface !=0) {
+          
+          if (elt.date_mutation.getFullYear() == 2019) {
+              totalPrice2019 += +elt.valeur_fonciere;
+              totalSurface2019 += +elt.lot1_surface_carrez;
+          }
+
+          if (elt.date_mutation.getFullYear() == 2020) {
+            totalPrice2020 += +elt.valeur_fonciere;
+            totalSurface2020 += +elt.lot1_surface_carrez;
+          }
         }
       });
 
-      // Compute the price per square meter of the first and last transactions
-      const pricePerSquareMeter2019 = totalPrice2019 / totalSurface2019;
-      const pricePerSquareMeter2020 = totalPrice2020 / totalSurface2020;
+      let pricePerSquareMeter2019 = 0;
+      let pricePerSquareMeter2020 = 0;
+      
+
+      // Compute the price per square meter of 2019 and 2020 transactions
+      if (totalPrice2019 != 0 && totalSurface2019 != 0) {
+        pricePerSquareMeter2019 = Math.round(totalPrice2019 / totalSurface2019);
+      }
+      
+      if (totalPrice2020 != 0 && totalSurface2020 != 0) {
+        pricePerSquareMeter2020 = Math.round(totalPrice2020 / totalSurface2020);
+      }
 
       const inflationRate: InflationRate = {
         averagePrice2019: pricePerSquareMeter2019,
         averagePrice2020: pricePerSquareMeter2020,
-        delta20192020: pricePerSquareMeter2020 - pricePerSquareMeter2019,
+        inflation: pricePerSquareMeter2020 - pricePerSquareMeter2019,
       };
 
       return inflationRate;
