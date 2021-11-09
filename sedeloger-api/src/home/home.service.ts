@@ -194,7 +194,7 @@ export class HomeService {
 
       let pricePerSquareMeter2019 = 0;
       let pricePerSquareMeter2020 = 0;
-      
+      let inflationRate = 0;
 
       // Compute the price per square meter of 2019 and 2020 transactions
       if (totalPrice2019 != 0 && totalSurface2019 != 0) {
@@ -205,13 +205,19 @@ export class HomeService {
         pricePerSquareMeter2020 = Math.round(totalPrice2020 / totalSurface2020);
       }
 
-      const inflationRate: InflationRate = {
+      if (pricePerSquareMeter2019 != 0 && pricePerSquareMeter2020 != 0) {
+        inflationRate = +(pricePerSquareMeter2020 / pricePerSquareMeter2019 * 100 - 100).toFixed(2);
+      }
+
+
+      const result: InflationRate = {
         averagePrice2019: pricePerSquareMeter2019,
         averagePrice2020: pricePerSquareMeter2020,
-        inflation: pricePerSquareMeter2020 - pricePerSquareMeter2019,
+        inflationPrice: pricePerSquareMeter2020 - pricePerSquareMeter2019,
+        inflationRate: inflationRate,
       };
 
-      return inflationRate;
+      return result;
     } catch (error) {
       throw error;
     }
