@@ -7,6 +7,7 @@ import {
   CreditInfos,
   CreditResults,
   DeltaPrice,
+  InflationRate,
   SelogerFilters,
 } from './home.interface';
 import { HomeEntity } from './home.entity';
@@ -212,6 +213,64 @@ export class HomeService {
       });
 
       return Math.round(totalPrice / totalSurface);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getInflationRate(filter: SelogerFilters): Promise<InflationRate> {
+    try {
+      const transactions = await this.usersRepository.find({ where: filter });
+      let totalPrice2019 = 0;
+      let totalSurface2019 = 0;
+      let totalPrice2020 = 0;
+      let totalSurface2020 = 0;
+
+      // Get the price and surface of the first and last transactions
+      transactions.forEach((elt) => {
+        const currPrice = +elt.valeur_fonciere;
+        const currSurface = +elt.lot1_surface_carrez;
+
+        // Check if this transaction should be taken into account
+        if (currPrice != 0 && currSurface != 0) {
+          if (elt.date_mutation.getFullYear() == 2019) {
+            totalPrice2019 += currPrice;
+            totalSurface2019 += currSurface;
+          } else if (elt.date_mutation.getFullYear() == 2020) {
+            totalPrice2020 += currPrice;
+            totalSurface2020 += currSurface;
+          }
+        }
+      });
+
+      let pricePerSquareMeter2019 = 0;
+      let pricePerSquareMeter2020 = 0;
+      let inflationRate = 0;
+
+      // Compute the price per square meter of 2019 and 2020 transactions
+      if (totalPrice2019 != 0 && totalSurface2019 != 0) {
+        pricePerSquareMeter2019 = Math.round(totalPrice2019 / totalSurface2019);
+      }
+
+      if (totalPrice2020 != 0 && totalSurface2020 != 0) {
+        pricePerSquareMeter2020 = Math.round(totalPrice2020 / totalSurface2020);
+      }
+
+      if (pricePerSquareMeter2019 != 0 && pricePerSquareMeter2020 != 0) {
+        inflationRate = +(
+          (pricePerSquareMeter2020 / pricePerSquareMeter2019) * 100 -
+          100
+        ).toFixed(2);
+      }
+
+      const result: InflationRate = {
+        averagePrice2019: pricePerSquareMeter2019,
+        averagePrice2020: pricePerSquareMeter2020,
+        inflationPrice: pricePerSquareMeter2020 - pricePerSquareMeter2019,
+        inflationRate: inflationRate,
+      };
+
+      return result;
     } catch (error) {
       throw error;
     }

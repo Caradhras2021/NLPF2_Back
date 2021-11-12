@@ -9,3 +9,5 @@
 5- psql -U postgres
 
 6- \copy immobilier FROM '/var/lib/postgresql/data/new_full.csv' DELIMITER ',' CSV HEADER;
+
+6b- \copy immobilier FROM '/var/lib/postgresql/data/new_2019.csv' DELIMITER ',' CSV;

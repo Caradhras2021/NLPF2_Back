@@ -4,6 +4,7 @@ import {
   AveragePrice,
   CreditInfos,
   CreditResults,
+  InflationRate,
   SelogerFilters,
 } from './home.interface';
 import { HomeService } from './home.service';
@@ -58,6 +59,14 @@ export class HomeController {
     @Body('creditInfos') creditInfos: CreditInfos,
   ): Promise<CreditResults> {
     const data = this.homeService.getCredit(filters, creditInfos);
+    return data;
+  }
+
+  @Post('/inflationRate')
+  getInflationRate(
+    @Body('filters') filters: SelogerFilters,
+  ): Promise<InflationRate> {
+    const data = this.homeService.getInflationRate(filters);
     return data;
   }
 }

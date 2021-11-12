@@ -49,3 +49,10 @@ export interface AveragePrice {
   nbResult: number;
   deltaMinMax: DeltaPrice;
 }
+
+export interface InflationRate {
+  averagePrice2019: number;
+  averagePrice2020: number;
+  inflationPrice: number;
+  inflationRate: number;
+}
