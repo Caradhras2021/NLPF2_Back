@@ -18,9 +18,18 @@ export class HomeService {
     private usersRepository: Repository<HomeEntity>,
   ) {}
 
-  async getByFilters(filter: SelogerFilters): Promise<HomeEntity[]> {
+  async getByFilters(filters: SelogerFilters): Promise<HomeEntity[]> {
     try {
-      const res = await this.usersRepository.find({ where: filter });
+      const newFilters = {};
+      for (const attribut in filters) {
+        newFilters[attribut] = filters[attribut];
+      }
+      if (filters['lot1_surface_carrez'] !== undefined) {
+        const min = Math.round(filters['lot1_surface_carrez'] * 0.85);
+        const max = Math.round(filters['lot1_surface_carrez'] * 1.15);
+        newFilters['lot1_surface_carrez'] = Between(min, max);
+      }
+      const res = await this.usersRepository.find({ where: newFilters });
       return res;
     } catch (error) {
       throw error;

@@ -22,7 +22,7 @@ export class HomeController {
     return this.homeService.getAll();
   }
 
-  @Post('/testFilters')
+  @Post('/filters')
   getTestFilters(
     @Body('filters') filters: SelogerFilters,
   ): Promise<HomeEntity[]> {
