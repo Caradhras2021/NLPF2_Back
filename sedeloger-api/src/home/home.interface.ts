@@ -7,7 +7,7 @@ export interface SelogerFilters {
   adresse_nom_voie?: string;
   code_postal?: number;
   nom_commune?: string;
-  lot1_surface_carrez?: number;
+  surface_reelle_bati?: number;
   type_local?: string;
   nombre_pieces_principales?: number;
   longitude?: number;

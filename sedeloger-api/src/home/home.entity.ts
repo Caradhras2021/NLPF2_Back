@@ -1,4 +1,3 @@
-import { ParseIntPipe } from '@nestjs/common';
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'immobilier' })
@@ -25,7 +24,7 @@ export class HomeEntity {
   nom_commune: string;
 
   @Column()
-  lot1_surface_carrez: number;
+  surface_reelle_bati: number;
 
   @Column()
   type_local: string;

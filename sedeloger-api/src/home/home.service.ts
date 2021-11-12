@@ -25,10 +25,10 @@ export class HomeService {
       for (const attribut in filters) {
         newFilters[attribut] = filters[attribut];
       }
-      if (filters['lot1_surface_carrez'] !== undefined) {
-        const min = Math.round(filters['lot1_surface_carrez'] * 0.85);
-        const max = Math.round(filters['lot1_surface_carrez'] * 1.15);
-        newFilters['lot1_surface_carrez'] = Between(min, max);
+      if (filters['surface_reelle_bati'] !== undefined) {
+        const min = Math.round(filters['surface_reelle_bati'] * 0.85);
+        const max = Math.round(filters['surface_reelle_bati'] * 1.15);
+        newFilters['surface_reelle_bati'] = Between(min, max);
       }
       const res = await this.usersRepository.find({ where: newFilters });
       return res;
@@ -43,7 +43,7 @@ export class HomeService {
       let totalSurface = 0;
       let totalPrice = 0;
       res.forEach((elt) => {
-        totalSurface += +elt.lot1_surface_carrez;
+        totalSurface += +elt.surface_reelle_bati;
         totalPrice += +elt.valeur_fonciere;
       });
 
@@ -85,7 +85,7 @@ export class HomeService {
       let totalResponse = 0;
       const delta: DeltaPrice = { min: 999999, max: 0 };
       res.forEach((elt) => {
-        const sizeCarrez = +elt.lot1_surface_carrez;
+        const sizeCarrez = +elt.surface_reelle_bati;
         const price = +elt.valeur_fonciere;
         if (sizeCarrez !== 0 && price !== 0) {
           totalResponse += 1;
@@ -171,7 +171,7 @@ export class HomeService {
       let totalResponse = 0;
       const delta: DeltaPrice = { min: 999999, max: 0 };
       res.forEach((elt) => {
-        const sizeCarrez = +elt.lot1_surface_carrez;
+        const sizeCarrez = +elt.surface_reelle_bati;
         const price = +elt.valeur_fonciere;
         if (sizeCarrez !== 0 && price !== 0) {
           totalResponse += 1;
@@ -208,7 +208,7 @@ export class HomeService {
       let totalSurface = 0;
       let totalPrice = 0;
       res.forEach((elt) => {
-        totalSurface += +elt.lot1_surface_carrez;
+        totalSurface += +elt.surface_reelle_bati;
         totalPrice += +elt.valeur_fonciere;
       });
 
@@ -229,7 +229,7 @@ export class HomeService {
       // Get the price and surface of the first and last transactions
       transactions.forEach((elt) => {
         const currPrice = +elt.valeur_fonciere;
-        const currSurface = +elt.lot1_surface_carrez;
+        const currSurface = +elt.surface_reelle_bati;
 
         // Check if this transaction should be taken into account
         if (currPrice != 0 && currSurface != 0) {
