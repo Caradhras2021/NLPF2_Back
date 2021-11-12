@@ -52,13 +52,15 @@ $ npm run start:prod
 
 2- sudo docker-compose up -d
 
-3- sudo mv new_full.csv db/data
+3- sudo mv 2020.csv db/data
+   sudo mv 2019.csv db/data
 
 4- sudo docker exec -it postgres /bin/bash
 
 5- psql -U postgres
 
-6- \copy immobilier FROM '/var/lib/postgresql/data/new_full.csv' DELIMITER ',' CSV HEADER;
+6- \copy immobilier FROM '/var/lib/postgresql/data/2020.csv' DELIMITER ',' CSV HEADER;
+   \copy immobilier FROM '/var/lib/postgresql/data/2019.csv' DELIMITER ',' CSV HEADER;
 ```
 
 ## Test
