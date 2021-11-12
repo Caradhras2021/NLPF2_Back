@@ -174,14 +174,17 @@ export class HomeService {
         const sizeCarrez = +elt.surface_reelle_bati;
         const price = +elt.valeur_fonciere;
         if (sizeCarrez !== 0 && price !== 0) {
-          totalResponse += 1;
           totalSurface += sizeCarrez;
           totalPrice += price;
           const currAveragePrice = price / sizeCarrez;
-          if (delta.min > currAveragePrice) {
-            delta.min = Math.round(currAveragePrice);
-          } else if (delta.max < currAveragePrice) {
-            delta.max = Math.round(currAveragePrice);
+          if (currAveragePrice > 100) {
+            totalResponse += 1;
+
+            if (delta.min > currAveragePrice) {
+              delta.min = Math.round(currAveragePrice);
+            } else if (delta.max < currAveragePrice) {
+              delta.max = Math.round(currAveragePrice);
+            }
           }
         }
       });
