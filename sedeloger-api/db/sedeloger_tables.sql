@@ -16,21 +16,6 @@ CREATE TABLE IF NOT EXISTS users
 (id SERIAL PRIMARY KEY NOT NULL,
 logins varchar,
 email_address varchar);
-
-CREATE TABLE IF NOT EXISTS estimation
-(id SERIAL PRIMARY KEY NOT NULL,
-surface numeric,
-pieces numeric,
-ville varchar,
-types varchar,
-resultat numeric,
-dates varchar,
-code_postal varchar,
-users_id SERIAL,
-foreign key(users_id) references users(id));
-
-CREATE TABLE IF NOT EXISTS recherche
-(id SERIAL PRIMARY KEY NOT NULL,
 surface numeric,
 pieces numeric,
 ville varchar,
@@ -38,5 +23,5 @@ types varchar,
 budget numeric,
 dates varchar,
 code_postal varchar,
-users_id SERIAL,
-foreign key(users_id) references users(id));
+resultat numeric,
+type_research varchar);

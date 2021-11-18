@@ -5,36 +5,58 @@ export class HomeEntity {
   @PrimaryGeneratedColumn()
   id_mutation: string;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   date_mutation: Date;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   valeur_fonciere: number;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   adresse_numero: number;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   adresse_nom_voie: string;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   code_postal: number;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   nom_commune: string;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   surface_reelle_bati: number;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   type_local: string;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   nombre_pieces_principales: number;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   longitude: number;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   latitude: number;
 }

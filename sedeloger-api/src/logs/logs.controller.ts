@@ -1,22 +1,18 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { Estimation, Recherche } from './logs.interface';
+import { UserEntity } from './logs.entity';
+import { Logs } from './logs.interface';
 import { LogsService } from './logs.service';
 
 @Controller('/logs')
 export class LogsController {
   constructor(private readonly LogsService: LogsService) {}
 
-  @Post('/estimation')
-  postEstimation(@Body('logs') logs: Estimation): Promise<string> {
-    return this.LogsService.estimation(logs);
+  @Post('/')
+  postLogs(@Body('logs') logs: Logs): Promise<UserEntity> {
+    return this.LogsService.postLogsService(logs);
   }
 
-  @Post('/recherche')
-  postRecherche(@Body('logs') logs: Recherche): Promise<string> {
-    return this.LogsService.recherche(logs);
-  }
-
-  @Get('/getLogs')
+  @Get('/')
   getLogs(): any {
     return this.LogsService.getLogs();
   }
