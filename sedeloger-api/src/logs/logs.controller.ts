@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { UserEntity } from './logs.entity';
-import { Logs } from './logs.interface';
+import { Logs, SignIn } from './logs.interface';
 import { LogsService } from './logs.service';
 
 @Controller('/logs')
@@ -12,8 +12,13 @@ export class LogsController {
     return this.LogsService.postLogsService(logs);
   }
 
-  @Get('/')
-  getLogs(): any {
-    return this.LogsService.getLogs();
+  @Get('/allLogs')
+  getLogs(): Promise<UserEntity[]> {
+    return this.LogsService.getAllLogs();
+  }
+
+  @Post('/userLogs')
+  getUserLogs(@Body('signIn') signIn: SignIn): Promise<UserEntity[]> {
+    return this.LogsService.getUserLogs(signIn);
   }
 }

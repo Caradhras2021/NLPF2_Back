@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { getConnection, getManager, Repository } from 'typeorm';
 import { UserEntity } from './logs.entity';
-import { Logs } from './logs.interface';
+import { Logs, SignIn } from './logs.interface';
 
 @Injectable()
 export class LogsService {
@@ -33,11 +33,24 @@ export class LogsService {
     }
   }
 
-  async getLogs(): Promise<any> {
+  async getUserLogs(signIn: SignIn): Promise<UserEntity[]> {
     try {
-      await this.usersRepository.find({
-        where: {},
+      const usersResearch = await this.usersRepository.find({
+        where: {
+          logins: signIn['login'],
+          email_address: signIn['email_address'],
+        },
       });
+      return usersResearch;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getAllLogs(): Promise<UserEntity[]> {
+    try {
+      const usersResearch = await this.usersRepository.find();
+      return usersResearch;
     } catch (error) {
       throw error;
     }

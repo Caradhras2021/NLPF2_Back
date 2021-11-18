@@ -10,3 +10,8 @@ export interface Logs {
   resultat?: number;
   budget?: number;
 }
+
+export interface SignIn {
+  login: string;
+  email_address: string;
+}
