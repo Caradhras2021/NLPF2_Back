@@ -42,7 +42,7 @@ class ConfigService {
       database: this.getValue('POSTGRES_DATABASE'),
 
       entities: [HomeEntity, UserEntity],
-      synchronize: true,
+      synchronize: false,
     };
   }
 }
