@@ -1,6 +1,7 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { HomeEntity } from 'src/home/home.entity';
 import { UserEntity } from 'src/logs/logs.entity';
+import { UsersEntity } from 'src/users/users.entity';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
@@ -41,7 +42,7 @@ class ConfigService {
       password: this.getValue('POSTGRES_PASSWORD'),
       database: this.getValue('POSTGRES_DATABASE'),
 
-      entities: [HomeEntity, UserEntity],
+      entities: [HomeEntity, UserEntity, UsersEntity],
       synchronize: false,
     };
   }
