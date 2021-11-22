@@ -25,3 +25,8 @@ dates varchar,
 code_postal varchar,
 resultat numeric,
 type_research varchar);
+
+CREATE TABLE IF NOT EXISTS login
+(id SERIAL PRIMARY KEY NOT NULL,
+email_address varchar,
+password varchar);
