@@ -15,7 +15,7 @@ latitude numeric);
 CREATE TABLE IF NOT EXISTS users
 (id SERIAL PRIMARY KEY NOT NULL,
 logins varchar,
-email_address varchar);
+email_address varchar;
 surface numeric,
 pieces numeric,
 ville varchar,
