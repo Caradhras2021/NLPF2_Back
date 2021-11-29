@@ -30,6 +30,7 @@ export class HomeService {
         const max = Math.round(filters['surface_reelle_bati'] * 1.15);
         newFilters['surface_reelle_bati'] = Between(min, max);
       }
+      
       const res = await this.usersRepository.find({ where: newFilters });
       return res;
     } catch (error) {
