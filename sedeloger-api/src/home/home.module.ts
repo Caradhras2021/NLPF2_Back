@@ -9,5 +9,8 @@ import { HomeService } from './home.service';
   exports: [TypeOrmModule],
   providers: [HomeService],
   controllers: [HomeController],
+
+
+  
 })
 export class HomeModule {}
