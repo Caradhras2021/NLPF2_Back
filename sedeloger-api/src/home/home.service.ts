@@ -117,10 +117,6 @@ export class HomeService {
     }
   }
 
-
-
-
-  
   recalculateFilters(creditInfos: CreditInfos): CreditCompute {
     const priceMax = creditInfos.apport * 10;
     const mensualiteMax = creditInfos.salaire * 0.3;
