@@ -73,6 +73,8 @@ export class HomeService {
       return 99;
     }
     return Math.round(res);
+
+    
   }
 
   async getAveragePriceHouse(filter: SelogerFilters): Promise<AveragePrice> {
