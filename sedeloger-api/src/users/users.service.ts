@@ -42,6 +42,9 @@ export class UsersService {
     async getUser(email_address: string): Promise<UsersEntity> {
         return await this.usersRepository.findOne({
             where: { email_address: email_address }
+
+
+            
         })
     }
 }
