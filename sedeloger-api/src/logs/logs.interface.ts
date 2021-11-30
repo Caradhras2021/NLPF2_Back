@@ -9,10 +9,6 @@ export interface Logs {
   code_postal?: string;
   resultat?: number;
   budget?: number;
-
-
-
-  
 }
 
 export interface SignIn {
