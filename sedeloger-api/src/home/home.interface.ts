@@ -12,10 +12,6 @@ export interface SelogerFilters {
   nombre_pieces_principales?: number;
   longitude?: number;
   latitude?: number;
-
-
-
-  
 }
 
 export interface CreditResults {
