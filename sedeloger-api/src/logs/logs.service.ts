@@ -11,6 +11,9 @@ export class LogsService {
     private usersRepository: Repository<UserEntity>,
   ) {}
 
+
+
+  
   async postLogsService(logs: Logs): Promise<UserEntity> {
     const currentdate = new Date().toLocaleString();
     try {
