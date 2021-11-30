@@ -60,10 +60,6 @@ export class HomeController {
   ): Promise<CreditResults> {
     const data = this.homeService.getCredit(filters, creditInfos);
     return data;
-
-
-
-    
   }
 
   @Post('/inflationRate')
