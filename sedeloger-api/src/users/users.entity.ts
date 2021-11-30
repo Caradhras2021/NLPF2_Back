@@ -12,13 +12,6 @@ export class UsersEntity {
 
 
 
-
-
-
-
-
-
-  
   @Column()
   password: string;
 }
