@@ -8,10 +8,6 @@ export class UsersEntity {
   @Column()
   email_address: string;
 
-
-
-
-
   @Column()
   password: string;
 }
