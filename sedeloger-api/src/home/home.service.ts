@@ -114,7 +114,6 @@ export class HomeService {
       return averagePriceRes;
     } catch (error) {
       throw error;
-      
     }
   }
 
