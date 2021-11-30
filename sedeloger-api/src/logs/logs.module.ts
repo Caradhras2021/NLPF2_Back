@@ -9,5 +9,9 @@ import { LogsService } from './logs.service';
   exports: [TypeOrmModule],
   providers: [LogsService],
   controllers: [LogsController],
+
+
+
+  
 })
 export class LogsModule {}
