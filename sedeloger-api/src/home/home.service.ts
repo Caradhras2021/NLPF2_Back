@@ -73,7 +73,6 @@ export class HomeService {
       return 99;
     }
     return Math.round(res);
-
   }
 
   async getAveragePriceHouse(filter: SelogerFilters): Promise<AveragePrice> {
@@ -115,6 +114,7 @@ export class HomeService {
       return averagePriceRes;
     } catch (error) {
       throw error;
+      
     }
   }
 
