@@ -68,5 +68,9 @@ export class HomeController {
   ): Promise<InflationRate> {
     const data = this.homeService.getInflationRate(filters);
     return data;
+
+
+
+    
   }
 }
